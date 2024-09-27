@@ -1,26 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 
-const products = [
-  { id: 1, name: 'Samsung Galaxy S8', price: 16303, color: 'Black' },
-  { id: 2, name: 'Samsung Galaxy S9', price: 20888, color: 'Black' },
-  { id: 3, name: 'Samsung Galaxy S8+', price: 18701, color: 'Black' },
-];
+import React, { useContext } from 'react'
+import DataContext from '../context/DataContext'
+import { Link } from 'react-router-dom'
 
-function Home() {
+const Home = () => {
+  const { data } = useContext(DataContext)
   return (
-    <div>
-      <h1>Home</h1>
-      {products.map(product => (
-        <div key={product.id}>
-          <Link to={`/products/${product.id}`}>
-            {product.name} {product.color}
-          </Link>
-          <p>Price: {product.price}</p>
-        </div>
-      ))}
+    <div>Home
+      {data.map((el, i) => {
+        return (
+          <div key={el.id} style={{ border: "1px solid black" }} >
+            <h3>{el.name}</h3>
+            <p>{el.desc}</p>
+            <b>{el.price}</b>
+            <img height="100px" src={el.image} alt="" />
+            <Link to={`/products/${el.id}`}><button className='btn' >Buy</button></Link>
+          </div>
+        )
+      })}
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
