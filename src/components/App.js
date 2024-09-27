@@ -1,26 +1,30 @@
 
-import React from 'react';
-import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import Home from './Home';
-import ProductDetail from './ProductDetail';
-import Admin from './Admin';
+import React, { useContext } from "react";
+import './../styles/App.css';
+import Navbar from "./Navbar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import Admin from "./Admin";
+import ProductDetails from "./ProductDetails";
+import EditPage from "./EditPage";
 
-function App() {
+
+const App = () => {
+
   return (
-    <Router>
+    <BrowserRouter>
       <div>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/admin">Admin</Link>
-        </nav>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/products/:id" component={ProductDetail} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
+        {/* Do not remove the main div */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/admin" element={<Admin/>} />
+          <Route path="/products/:id" element={<ProductDetails/>} />
+          <Route path="admin/products/:id" element={<EditPage/>} />
+        </Routes>
       </div>
-    </Router>
-  );
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
